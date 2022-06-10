@@ -1,10 +1,16 @@
 package dev.cho.model;
 
-public class Client {
+public class client {
 	private String username;
 	private String password;
 	private int userId;
 	
+	public client(int i, String string, String string2) {
+		this.userId = i;
+		this.username = string;
+		this.password = string2;
+	}
+
 	public String getUsername() {
 		return username;
 	}

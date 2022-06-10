@@ -1,6 +1,6 @@
 package dev.cho.model;
 
-public class Account {
+public class account {
 	private int accountNumber;
 	private double balance;
 	
