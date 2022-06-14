@@ -64,7 +64,7 @@ public class ConnectionUtil {
 		return conn;
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) { //remove this later since it's not good coding to keep this runnable
 		Connection connection = getConnectionUtil().getConnection();
 		
 		if(connection != null) {

@@ -5,7 +5,13 @@ public class client {
 	private String password;
 	private int userId;
 	
+	
+	public client() {
+		super();
+	}
+	
 	public client(int i, String string, String string2) {
+		super();
 		this.userId = i;
 		this.username = string;
 		this.password = string2;
