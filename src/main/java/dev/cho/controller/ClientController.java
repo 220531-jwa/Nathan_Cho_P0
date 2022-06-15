@@ -24,19 +24,6 @@ public class ClientController {
 		ctx.json(c);
 	}
 	
-	/*
-	 * public static void getUserById(Context ctx) {
-		int id = Integer.parseInt(ctx.pathParam("id"));
-		User u = null;
-		try {
-			u = us.getUserById(id);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		ctx.status(200);
-		ctx.json(u);
-	}
-	*/
 	public static void getClientById(Context ctx) {
 		int id = Integer.parseInt(ctx.pathParam("id"));
 		client c = null;

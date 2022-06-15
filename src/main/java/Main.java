@@ -1,8 +1,12 @@
 import java.nio.file.Path;
 
-import dev.cho.model.client;
-import dev.cho.model.account;
+import javax.management.Query;
 
+import dev.cho.model.client;
+import dev.cho.repositories.AccountDAO;
+import dev.cho.repositories.UserDAO;
+import dev.cho.model.account;
+import dev.cho.controller.AccountController;
 import dev.cho.controller.ClientController;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
@@ -12,8 +16,11 @@ import io.javalin.http.NotFoundResponse;
 import static io.javalin.apibuilder.ApiBuilder.*;
 
 
-public class JavalinDemo {
+public class Main {
 	public static void main(String[] args) {
+		
+		UserDAO ud = new UserDAO();
+		AccountDAO ad = new AccountDAO();
 		
 		Javalin app = Javalin.create();
 		
@@ -33,6 +40,15 @@ public class JavalinDemo {
 						delete(ClientController::deleteClient);
 						put(ClientController::updateClient);
 //						patch(ClientControler::updatePassword);
+						path("/accounts", () -> {
+							get(AccountController::getAccountsByID);
+							post(AccountController::createNewAccount);
+							path("/{account_number}", () -> {
+								get(AccountController::getAccountByAccountNumber);
+								delete(AccountController::deleteAccountByAccountNumber);
+								put(AccountController::updateAccount);
+							});
+						});
 				});
 			});
 			
