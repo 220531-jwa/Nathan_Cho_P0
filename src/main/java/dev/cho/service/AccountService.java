@@ -10,6 +10,10 @@ import dev.cho.repositories.AccountDAO;
 public class AccountService {
 	private static AccountDAO accountDao = new AccountDAO();
 	
+	public AccountService(AccountDAO accountDao) {
+		this.accountDao = accountDao;
+	}
+	
 	public account createAccount(int id) {
 		account defaultParams = new account(0, 0D, "checking");
 		account createdAccount= accountDao.createAccount(defaultParams, id);
@@ -83,22 +87,20 @@ public class AccountService {
 
 	public double accountWithdraw(int id, int accNum, double ammount) {
 		
+		double newBal = -1;
 		account inQuestion = accountDao.getAccountByAccountNumber(id, accNum);
 		if(inQuestion.getBalance() > ammount) {
-			accountDao.accountWithdraw(id, accNum, ammount, inQuestion.getBalance());
+			newBal = accountDao.accountWithdraw(id, accNum, ammount, inQuestion.getBalance());
 		}
 		else return -1;
 		
-		double newBal = accountDao.getAccountByAccountNumber(id, accNum).getBalance();
 		
 		return newBal;
 	}
 	
 	public double accountDeposit(int id, int accNum, double ammount) {
 		
-		accountDao.accountDeposit(id, accNum, ammount, accountDao.getAccountByAccountNumber(id, accNum).getBalance());
-		
-		double newBal = accountDao.getAccountByAccountNumber(id, accNum).getBalance();
+		double newBal = accountDao.accountDeposit(id, accNum, ammount, accountDao.getAccountByAccountNumber(id, accNum).getBalance());
 		
 		return newBal;
 	}

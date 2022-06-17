@@ -1,19 +1,29 @@
 package Services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.runner.RunWith;
 
 import dev.cho.model.client;
 import dev.cho.repositories.UserDAO;
@@ -22,12 +32,24 @@ import dev.cho.service.ClientService;
 @ExtendWith(MockitoExtension.class) // got rid of the null pointer exception
 public class ClientServiceTests {
 	
-	@InjectMocks
+	
+//	@Mock
+//	public static UserDAO mockUserDao = new UserDAO();
+//	
+//	@InjectMocks
+//	public static ClientService clientService = new ClientService(mockUserDao);
+
+	private static UserDAO mockUserDao;
 	private static ClientService clientService;
 	
-	@Mock
-	private static UserDAO mockUserDao;
+	@BeforeEach
+	public void setUp() {
+		//refreshing the mock so that it runs unique to each test.
+		mockUserDao = mock(UserDAO.class);
+		clientService = new ClientService(mockUserDao);
+	}
 
+	
 	@Test
 	public void should_ReturnAllClients(){
 		//given
@@ -73,11 +95,9 @@ public class ClientServiceTests {
 	
 	@Test
 	public void should_deleteClient() {
-		//do I need to write a test for a method with no return?
 	}
 	
 	@Test
 	public void should_updateClient() {
-		//same here
 	}
 }

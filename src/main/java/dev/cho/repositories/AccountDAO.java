@@ -220,7 +220,7 @@ public class AccountDAO {
 		return null;
 	}
 
-	public void accountWithdraw(int id, int accNum, double ammount, double currentBal) {
+	public double accountWithdraw(int id, int accNum, double ammount, double currentBal) {
 		String sql = "update accounts set balance = ? where client_id = ? and account_number = ?";
 		
 		try(Connection conn = cu.getConnection()){
@@ -230,13 +230,17 @@ public class AccountDAO {
 			ps.setInt(3, accNum);
 			
 			ps.executeUpdate();
+			
+			return currentBal - ammount;
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return -1;
 	}
 	
-	public void accountDeposit(int id, int accNum, double ammount, double currentBal) {
+	public double accountDeposit(int id, int accNum, double ammount, double currentBal) {
 		String sql = "update accounts set balance = ? where client_id = ? and account_number = ?";
 		
 		try(Connection conn = cu.getConnection()){
@@ -246,9 +250,13 @@ public class AccountDAO {
 			ps.setInt(3, accNum);
 			
 			ps.executeUpdate();
+			
+			return currentBal + ammount;
 			}
 		catch(SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return -1;
 	}
 }

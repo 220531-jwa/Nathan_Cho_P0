@@ -6,8 +6,11 @@ public class client {
 	private int userId;
 	
 	
-	public client() {
+	public client() { //default client
 		super();
+		this.userId = 0;
+		this.username = "default";
+		this.password = "default";
 	}
 	
 	public client(int i, String string, String string2) {

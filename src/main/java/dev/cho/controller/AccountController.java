@@ -5,13 +5,14 @@ import java.util.List;
 
 import dev.cho.model.account;
 import dev.cho.model.client;
+import dev.cho.repositories.AccountDAO;
 import dev.cho.repositories.UserDAO;
 import dev.cho.service.AccountService;
 import dev.cho.service.ClientService;
 import io.javalin.http.Context;
 
 public class AccountController {
-	private static AccountService as = new AccountService();
+	private static AccountService as = new AccountService(new AccountDAO());
 	private static ClientService cs = new ClientService(new UserDAO());
 	
 	public static void createNewAccount(Context ctx) {
