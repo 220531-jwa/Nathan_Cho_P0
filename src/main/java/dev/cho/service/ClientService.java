@@ -7,10 +7,20 @@ import dev.cho.repositories.UserDAO;
 
 public class ClientService {
 	
-	private static UserDAO userDao = new UserDAO();
+	private static UserDAO userDao;
+	
+	public ClientService(UserDAO userDao) {
+		this.userDao = userDao;
+	}
 	
 	public List<client> getAllClients(){
-		return userDao.getAllClients();
+		List<client> clientList = userDao.getAllClients();
+		return clientList;
+	}
+	public client createClient() {
+		client defaultParams = new client(0, "default", "default");
+		client createdClient = userDao.createClient(defaultParams);
+		return createdClient;
 	}
 	
 	public client createClient(client c) {

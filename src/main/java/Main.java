@@ -47,6 +47,12 @@ public class Main {
 								get(AccountController::getAccountByAccountNumber);
 								delete(AccountController::deleteAccountByAccountNumber);
 								put(AccountController::updateAccount);
+								patch(AccountController::accountTransaction);
+								path("/transfer", () -> {
+									path("/{target_account_number}", () ->{
+										patch(AccountController::accountTransfer);
+									});
+								});
 							});
 						});
 				});
